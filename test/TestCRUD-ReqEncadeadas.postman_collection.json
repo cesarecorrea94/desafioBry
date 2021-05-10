@@ -1,0 +1,1705 @@
+{
+	"info": {
+		"_postman_id": "07910a18-5786-4819-ae59-e51c06f8d8c2",
+		"name": "TestCRUD-ReqEncadeadas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Funcionarios",
+			"item": [
+				{
+					"name": "Nenhum funcionario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Lista vazia\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fulano",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('fulanoEndpoint', loc);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": {{cpffulano}},\n\t\"nome\": \"Fulano\",\n\t\"email\": \"ful@no.com\",\n\t\"endereco\": \"Rua da Vó Salvelina\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sicrano",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('sicranoEndpoint', loc);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": {{cpfsicrano}},\n\t\"nome\": \"Sicrano\",\n\t\"email\": \"sicr@no.com\",\n\t\"endereco\": \"Cafundó do Judas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beltrano",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('beltranoEndpoint', loc);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": {{cpfbeltrano}},\n\t\"nome\": \"Beltrano\",\n\t\"email\": \"beltr@no.com\",\n\t\"endereco\": \"Casa da Mãe Joana\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CPF Duplicado",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 409 Conflicted\",()=>{",
+									"    pm.response.to.have.status(409);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": {{cpffulano}},\n\t\"nome\": \"Fulano Cpf Clonado\",\n\t\"email\": \"ful@no.com\",\n\t\"endereco\": \"Rua da Vó Salvelina\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Há 3 funcionarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Há 3 funcionários\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(3);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo nome",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"FulaNOVO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checa nome",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Novo nome do Fulano\", ()=>{",
+									"    pm.expect(pm.response.json().nome).to.equal('FulaNOVO');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"sicr@NOVO.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{sicranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{sicranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checa email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Novo email do Sicrano\", ()=>{",
+									"    pm.expect(pm.response.json().email).to.equal('sicr@NOVO.com');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{sicranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{sicranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo endereço",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"endereco\": \"NOVO endereço\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{beltranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{beltranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checa endereço",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Novo endereço do Beltrano\", ()=>{",
+									"    pm.expect(pm.response.json().endereco).to.equal('NOVO endereço');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{beltranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{beltranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Nenhuma empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Lista vazia\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alfa",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('alfaEndpoint', loc);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cnpj\": 111,\n\t\"nome\": \"Alfa\",\n\t\"endereco\": \"Avenida A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beta",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('betaEndpoint', loc);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cnpj\": 222,\n\t\"nome\": \"Beta\",\n\t\"endereco\": \"Bairro B\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gama",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201 Created\",()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Tem o cabeçalho Location\", ()=>{",
+									"    pm.response.to.have.header('Location');",
+									"    const loc = pm.response.headers.get('Location');",
+									"    pm.environment.set('gamaEndpoint', loc);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cnpj\": 333,\n\t\"nome\": \"Gama\",\n\t\"endereco\": \"Garagem G\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CNPJ Duplicado",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 409 Conflicted\",()=>{",
+									"    pm.response.to.have.status(409);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cnpj\": 111,\n\t\"nome\": \"Alfa Clonado\",\n\t\"endereco\": \"Avenida A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Há 3 empresas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Há 3 empresas\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(3);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Muda nome",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"NOVO Alfa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checa nome",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Novo nome do Alfa\", ()=>{",
+									"    pm.expect(pm.response.json().nome).to.equal('NOVO Alfa');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Muda endereço",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"endereco\": \"NOVO condominio\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{betaEndpoint}}",
+							"host": [
+								"{{dominio}}{{betaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checa endereço",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Novo endereco do Beta\", ()=>{",
+									"    pm.expect(pm.response.json().endereco).to.equal('NOVO condominio');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{betaEndpoint}}",
+							"host": [
+								"{{dominio}}{{betaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trabalham",
+			"item": [
+				{
+					"name": "Fulano trabalha em Beta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Beta torna-se associada a Fulano - 201 criada\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": 222\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}/empresas",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sicrano trabalha em Gama",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Gama torna-se associada a Sicrano - 201 criado\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": 333\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{sicranoEndpoint}}/empresas",
+							"host": [
+								"{{dominio}}{{sicranoEndpoint}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beltrano trabalha em Alfa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Alfa torna-se associada a Beltrano - 201 criado\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": 111\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{beltranoEndpoint}}/empresas",
+							"host": [
+								"{{dominio}}{{beltranoEndpoint}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Funcionarios trabalham nas empresas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"pm.test(\"Cada funcionario tem 1 empresa associada\", ()=>{",
+									"    for (let funcionario of pm.response.json()) {",
+									"        pm.expect(funcionario.empresas_associadas.length).equal(1);",
+									"    }",
+									"})",
+									"",
+									"function FuncTrabalhaEm(cpf, cnpj) {",
+									"    const func = pm.response.json().find((f) => f.cpf == cpf);",
+									"    listacnpj = func.empresas_associadas.map(({cnpj, ...rest}) => cnpj);",
+									"    pm.expect(listacnpj).to.contains(cnpj);",
+									"}",
+									"pm.test(\"Fulano trabalha em Beta\", ()=>FuncTrabalhaEm(111,'222'))",
+									"pm.test(\"Sicrano trabalha em Gama\", ()=>FuncTrabalhaEm(222,'333'))",
+									"pm.test(\"Beltrano trabalha em Alfa\", ()=>FuncTrabalhaEm(333,'111'))",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empregam",
+			"item": [
+				{
+					"name": "Alfa emprega Sicrano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sicrano vincula-se a Alfa - 201 vinculação criada\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": {{cpfsicrano}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}/funcionarios",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beta emprega Beltrano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Beltrano vincula-se a Beta - 201 vinculação criada\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": {{cpfbeltrano}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{betaEndpoint}}/funcionarios",
+							"host": [
+								"{{dominio}}{{betaEndpoint}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gama emprega Fulano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Fulano vincula-se a Gama - 201 vinculação criada\", ()=>{",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": {{cpffulano}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dominio}}{{gamaEndpoint}}/funcionarios",
+							"host": [
+								"{{dominio}}{{gamaEndpoint}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empresas empregaram funcionarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Cada empresa tem 2 funcionarios vinculados\", ()=>{",
+									"    for(const empr of pm.response.json()) {",
+									"        pm.expect(empr.funcionarios_vinculados.length).equal(2);",
+									"    }",
+									"})",
+									"function EmpresaEmprega(cnpj, cpf) {",
+									"    const empresa = pm.response.json().find((e) => e.cnpj == cnpj);",
+									"    const listacpf = empresa.funcionarios_vinculados.map( ({cpf, ...rest}) => cpf);",
+									"    pm.expect(listacpf).to.contains(cpf);",
+									"}",
+									"",
+									"pm.test(\"Alfa emprega Sicrano\", ()=>EmpresaEmprega(111,'222'))",
+									"pm.test(\"Beta emprega Beltrano\", ()=>EmpresaEmprega(222,'333'))",
+									"pm.test(\"Gama emprega Fulano\", ()=>EmpresaEmprega(333,'111'))",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deleção",
+			"item": [
+				{
+					"name": "Deleta Fulano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Fulano\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Não existe Fulano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Não existe Fulano\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Fulano novamente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Não existe Fulano\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{fulanoEndpoint}}",
+							"host": [
+								"{{dominio}}{{fulanoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Alfa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Alfa\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Não existe Alfa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Não existe Alfa\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Alfa novamente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Não existe Alfa\", ()=>{",
+									"    pm.response.to.have.status(404);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{alfaEndpoint}}",
+							"host": [
+								"{{dominio}}{{alfaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sobram 2 empresas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Sobram 2 empresas\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(2);",
+									"})",
+									"pm.test(\"Cada empresa tem 1 funcionario vinculado\", ()=>{",
+									"    for(const empresa of pm.response.json()){",
+									"        pm.expect(empresa.funcionarios_vinculados.length).to.equal(1);",
+									"    }",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/empresas",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sobram 2 funcionarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200 OK\",()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"pm.test(\"Sobram 2 funcionarios\", ()=>{",
+									"    pm.expect(pm.response.json().length).to.equal(2);",
+									"})",
+									"pm.test(\"Cada funcionario tem 1 empresa associada\", ()=>{",
+									"    for(const funcionario of pm.response.json())  {",
+									"        pm.expect(funcionario.empresas_associadas.length).to.equal(1);",
+									"    } ",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}/funcionarios",
+							"host": [
+								"{{dominio}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Sicrano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Sicrano\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{sicranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{sicranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Beltrano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Beltrano\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{beltranoEndpoint}}",
+							"host": [
+								"{{dominio}}{{beltranoEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Beta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Beta\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{betaEndpoint}}",
+							"host": [
+								"{{dominio}}{{betaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Gama",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleta Gama\", ()=>{",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{dominio}}{{gamaEndpoint}}",
+							"host": [
+								"{{dominio}}{{gamaEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "cpffulano",
+			"value": "111"
+		},
+		{
+			"key": "cpfsicrano",
+			"value": "222"
+		},
+		{
+			"key": "cpfbeltrano",
+			"value": "333"
+		},
+		{
+			"key": "cnpjalfa",
+			"value": "111"
+		},
+		{
+			"key": "cnpjbeta",
+			"value": "222"
+		},
+		{
+			"key": "cnpjgama",
+			"value": "333"
+		},
+		{
+			"key": "fulanoEndpoint",
+			"value": "123"
+		},
+		{
+			"key": "sicranoEndpoint",
+			"value": "123"
+		},
+		{
+			"key": "beltranoEndpoint",
+			"value": "123"
+		},
+		{
+			"key": "alfaEndpoint",
+			"value": "123"
+		},
+		{
+			"key": "betaEndpoint",
+			"value": "123"
+		},
+		{
+			"key": "gamaEndpoint",
+			"value": "123"
+		}
+	]
+}
