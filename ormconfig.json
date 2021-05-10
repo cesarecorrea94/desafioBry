@@ -1,0 +1,15 @@
+{
+   "type": "postgres",
+   "entities": [
+      "src/app/models/*.ts"
+   ],
+   "migrations": [
+      "src/database/migrations/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "migrationsDir": "src/database/migrations"
+   }
+}
